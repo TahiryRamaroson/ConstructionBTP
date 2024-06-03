@@ -1,0 +1,76 @@
+﻿@{
+	ViewData["Title"] = "PDF";
+	Layout = "_Layout_Authentification";
+}
+
+@model Tuple<List<V_devisDetails_affichage>, double, double, double, int, List<Paiement>, double>
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+<body>
+	<div class="container">
+		<div class="text-center mt-10">
+			<h1>Détails du devis n°@Model.Item5</h1>
+		</div>
+		<div class="row mt-10">
+			<div class="offset-md-1 col-md-10 offset-md-1">
+				<div class="table-responsive">
+					<table class="table table-rounded table-striped border gy-6 gs-6">
+						<thead>
+							<tr class="fw-semibold fs-6 text-gray-800 border-bottom border-gray-200">
+								<th>Travaux</th>
+								<th>Unité</th>
+								<th>Quantité</th>
+								<th>Prix Unitaire</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach (var item in Model.Item1)
+							{
+								<tr>
+									<td>@item.nomTravaux</td>
+									<td>@item.nomUnite</td>
+									<td>@item.quantite.ToString("N")</td>
+									<td>@item.prixUnitaire.ToString("N") Ar</td>
+								</tr>
+							}
+						</tbody>
+					</table>
+				</div>
+				<p><strong>Total des travaux: </strong>@Model.Item2.ToString("N") Ar</p>
+				<p><strong>Taux du finition: </strong>@Model.Item3.ToString("N") %</p>
+				<p><strong>Montant total: </strong>@Model.Item4.ToString("N") Ar</p>
+			</div>
+		</div>
+
+		<div class="text-center mt-10">
+			<h1>Liste des paiements effectués</h1>
+		</div>
+		<div class="row mt-10">
+			<div class="offset-md-1 col-md-10 offset-md-1">
+				<div class="table-responsive">
+					<table class="table table-rounded table-striped border gy-6 gs-6">
+						<thead>
+							<tr class="fw-semibold fs-6 text-gray-800 border-bottom border-gray-200">
+								<th>Reference</th>
+								<th>Date de paiement</th>
+								<th>montant</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach (var item in Model.Item6)
+							{
+								<tr>
+									<td>@item.numero</td>
+									<td>@item.datePaiement.ToString("dd MMMM yyyy")</td>
+									<td>@item.montant.ToString("N") Ar</td>
+								</tr>
+							}
+						</tbody>
+					</table>
+				</div>
+				<p><strong>Total payé: </strong>@Model.Item7.ToString("N") Ar</p>
+			</div>
+		</div>
+	</div>
+</body>

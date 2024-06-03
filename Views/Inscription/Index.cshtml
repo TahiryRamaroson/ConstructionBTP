@@ -1,0 +1,114 @@
+﻿@{
+	ViewData["Title"] = "Inscription";
+	Layout = "_Layout_Authentification";
+}
+
+<body id="kt_body" class="app-blank">
+
+	<script>var defaultThemeMode = "light"; var themeMode; if (document.documentElement) { if (document.documentElement.hasAttribute("data-bs-theme-mode")) { themeMode = document.documentElement.getAttribute("data-bs-theme-mode"); } else { if (localStorage.getItem("data-bs-theme") !== null) { themeMode = localStorage.getItem("data-bs-theme"); } else { themeMode = defaultThemeMode; } } if (themeMode === "system") { themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; } document.documentElement.setAttribute("data-bs-theme", themeMode); }</script>
+
+	<div class="d-flex flex-column flex-root" id="kt_app_root">
+		<div class="d-flex flex-column flex-lg-row flex-column-fluid">
+			<div class="d-flex flex-column flex-lg-row-auto bg-primary w-xl-600px positon-xl-relative">
+				<div class="d-flex flex-column position-xl-fixed top-0 bottom-0 w-xl-600px">
+
+					<div class="d-flex flex-row-fluid flex-column text-center p-5 p-lg-10 pt-lg-20">
+						<h1 class="d-none d-lg-block fw-bold text-white fs-2qx pb-5 pb-md-10">Bienvenue sur Construction</h1>
+						<p class="d-none d-lg-block fw-semibold fs-2 text-white">
+							Vous pouvez nous faire confiance
+							<br />pour n'importe quel travaux
+						</p>
+					</div>
+
+					<div class="d-none d-lg-block d-flex flex-row-auto bgi-no-repeat bgi-position-x-center bgi-size-contain bgi-position-y-bottom min-h-100px min-h-lg-350px mb-15" style="background-image: url(img/banniereAuth.png)"></div>
+
+				</div>
+
+			</div>
+
+			<div class="d-flex flex-column flex-lg-row-fluid py-10">
+				<div class="d-flex flex-center flex-column flex-column-fluid">
+					<div class="w-lg-600px p-10 p-lg-15 mx-auto">
+
+						<form asp-controller="Inscription" asp-action="TraitementLogin" method="get" class="form w-100" novalidate="novalidate" id="kt_sign_up_form">
+
+							<div class="mb-10 text-center">
+								<h1 class="text-dark mb-3">Inscription</h1>
+								<div class="text-gray-400 fw-semibold fs-4">
+									Déjà inscrit?
+									<a asp-controller="Login" asp-action="Index" asp-area="" class="link-primary fw-bold">Se connecter</a>
+								</div>
+							</div>
+
+							<div class="row fv-row mb-7">
+								<div class="col-xl-6">
+									<label class="form-label fw-bold text-dark fs-6">Nom</label>
+									<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="nom" autocomplete="off" />
+								</div>
+
+								<div class="col-xl-6">
+									<label class="form-label fw-bold text-dark fs-6">Prénom</label>
+									<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="prenom" autocomplete="off" />
+								</div>
+							</div>
+
+							<div class="fv-row mb-7">
+								<label class="form-label fw-bold text-dark fs-6">Email</label>
+								<input class="form-control form-control-lg form-control-solid" type="email" placeholder="" name="email" autocomplete="off" />
+							</div>
+
+							<div class="mb-10 fv-row" data-kt-password-meter="true">
+
+								<div class="mb-1">
+
+									<label class="form-label fw-bold text-dark fs-6">Mot de passe</label>
+									<div class="position-relative mb-3">
+										<input class="form-control form-control-lg form-control-solid" type="password" placeholder="" name="password" autocomplete="off" />
+										<span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2" data-kt-password-meter-control="visibility">
+											<i class="ki-duotone ki-eye-slash fs-2"></i>
+											<i class="ki-duotone ki-eye fs-2 d-none"></i>
+										</span>
+									</div>
+									<div class="d-flex align-items-center mb-3" data-kt-password-meter-control="highlight">
+										<div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
+										<div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
+										<div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
+										<div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px"></div>
+									</div>
+
+								</div>
+
+								<div class="text-muted">NB: niveau de sécurité de votre mot de passe</div>
+
+							</div>
+
+							<div class="fv-row mb-5">
+								<label class="form-label fw-bold text-dark fs-6">Confirmer mot de passe</label>
+								<input class="form-control form-control-lg form-control-solid" type="password" placeholder="" name="confirmpassword" autocomplete="off" />
+							</div>
+
+							<div class="text-center">
+								<button type="submit" id="kt_sign_up_submit" class="btn btn-lg btn-primary">
+									<span class="indicator-label">S'inscrire</span>
+									<span class="indicator-progress">
+										Veuillez patienter...
+										<span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+									</span>
+								</button>
+							</div>
+						</form>
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<script src="~/assets/plugins/global/plugins.bundle.js"></script>
+	<script src="~/assets/js/scripts.bundle.js"></script>
+	<script src="~/assets/js/custom/authentication/sign-up/general.js"></script>
+</body>

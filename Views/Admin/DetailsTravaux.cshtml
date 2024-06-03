@@ -1,0 +1,44 @@
+﻿@{
+	ViewData["Title"] = "Details Travaux";
+	Layout = "_Layout_Admin";
+}
+
+@model List<V_devisDetails_affichage>
+
+<body>
+	<div class="container">
+		<div class="text-center mt-10">
+			<h1>Détails du devis n°@ViewBag.Devis</h1>
+		</div>
+		<div class="row mt-10">
+			<div class="offset-md-1 col-md-10 offset-md-1">
+				<div class="table-responsive">
+					<table class="table table-rounded table-striped border gy-6 gs-6">
+						<thead>
+							<tr class="fw-semibold fs-6 text-gray-800 border-bottom border-gray-200">
+								<th>Travaux</th>
+								<th>Unité</th>
+								<th>Quantité</th>
+								<th>Prix Unitaire</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach (var item in Model)
+							{
+								<tr>
+									<td>@item.nomTravaux</td>
+									<td>@item.nomUnite</td>
+									<td>@item.quantite.ToString("N")</td>
+									<td>@item.prixUnitaire.ToString("N") Ar</td>
+								</tr>
+							}
+						</tbody>
+					</table>
+				</div>
+				<p><strong>Total des travaux: </strong>@ViewBag.MontantTravaux.ToString("N") Ar</p>
+				<p><strong>Taux du finition: </strong>@ViewBag.Taux.ToString("N") %</p>
+				<p><strong>Montant total: </strong>@ViewBag.Total.ToString("N") Ar</p>
+			</div>
+		</div>
+	</div>
+</body>

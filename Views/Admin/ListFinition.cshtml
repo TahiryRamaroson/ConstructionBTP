@@ -1,0 +1,110 @@
+﻿@{
+	ViewData["Title"] = "Finition";
+	Layout = "_Layout_Admin";
+}
+
+@model List<Finition>
+
+<div class="container">
+	<div class="text-center mt-10">
+		<h1>Liste des types de Finition</h1>
+	</div>
+	<div class="row mt-10">
+		<div class="offset-md-1 col-md-10 offset-md-1">
+			<div class="table-responsive">
+				<table class="table table-rounded table-striped border gy-6 gs-6">
+					<thead>
+						<tr class="fw-semibold fs-6 text-gray-800 border-bottom border-gray-200">
+							<th>Id</th>
+							<th>Nom</th>
+							<th>Taux</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var item in Model)
+						{
+							<tr>
+								<td>@item.id</td>
+								<td>@item.nom</td>
+								<td>@item.taux.ToString("N") %</td>
+								<td>
+									<button type="button" class="btn btn-light-success" data-bs-toggle="modal" data-bs-target="#kt_modal_1" data-finition-id="@item.id">
+										Modifier
+									</button>
+								</td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="text-center mt-5">
+		<ul class="pagination pagination-circle pagination-outline">
+			@if (ViewBag.CurrentPage > 1)
+			{
+				<li class="page-item previous m-1"><a asp-action="ListFinition" asp-controller="Admin" asp-route-pg="@(ViewBag.CurrentPage - 1)" class="page-link"><i class="previous"></i></a></li>
+			}
+			@for (var i = 1; i <= ViewBag.PageCount; i++)
+			{
+				if (i >= ViewBag.CurrentPage - 1 && i <= ViewBag.CurrentPage + 1)
+				{
+					<li class="page-item @(ViewBag.CurrentPage == i ? "active" : "") m-1"><a asp-action="ListFinition" asp-controller="Admin" asp-route-pg="@i" class="page-link">@i</a></li>
+				}
+			}
+			@if (ViewBag.CurrentPage < ViewBag.PageCount)
+			{
+				<li class="page-item next m-1"><a asp-action="ListFinition" asp-controller="Admin" asp-route-pg="@(ViewBag.CurrentPage + 1)" class="page-link"><i class="next"></i></a></li>
+			}
+		</ul>
+
+
+	</div>
+
+
+</div>
+
+<div class="modal fade" tabindex="-1" id="kt_modal_1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h3 class="modal-title">Modification</h3>
+
+				<!--begin::Close-->
+				<div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+					<i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
+				</div>
+				<!--end::Close-->
+			</div>
+			<form asp-controller="Admin" asp-action="UpdateFinition" method="get">
+				<div class="modal-body">
+					<div class="fv-row mb-10">
+						<label class="form-label fs-6 fw-bold text-dark">Taux</label>
+						<input class="form-control form-control-lg form-control-solid" type="number" name="taux" step="any" />
+						<input class="form-control form-control-lg form-control-solid" type="hidden" name="idfinition" value="" />
+					</div>
+				</div>
+
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-light-primary">Ok</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+
+	$(document).ready(function () {
+		$('#kt_modal_1').on('show.bs.modal', function (event) {
+			var button = $(event.relatedTarget) // Bouton qui a déclenché le modal
+			var devisId = button.data('finition-id') // Extrait l'information des attributs de données
+			var modal = $(this)
+			modal.find('input[name="idfinition"]').val(devisId)
+		})
+	});
+</script>

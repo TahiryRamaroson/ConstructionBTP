@@ -1,0 +1,96 @@
+﻿@{
+	ViewData["Title"] = "Dashboard";
+	Layout = "_Layout_Admin";
+}
+
+
+<div class="container">
+    <div class="text-center mt-10">
+        <h1>Tableau de bord</h1>
+    </div>
+    
+    <div class="row mt-10">
+        <div class="col-md-6">
+            <a href="#" class="card hover-elevate-up shadow-sm parent-hover">
+                <div class="card-body d-flex align-items">
+                    <i class="ki-duotone ki-tag fs-2 p-0 m-0">
+                        <span class="path1"></span>
+                        <span class="path2"></span>
+                        <span class="path3"></span>
+                    </i>
+
+                    <span class="ms-3 text-gray-700 parent-hover-success fs-6 fw-bold text-center">
+                        Montant Total des devis: @ViewBag.Total.ToString("N") Ar
+                    </span>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-6">
+            <a href="#" class="card hover-elevate-up shadow-sm parent-hover">
+                <div class="card-body d-flex align-items">
+                    <i class="ki-duotone ki-tag fs-2 p-0 m-0">
+                        <span class="path1"></span>
+                        <span class="path2"></span>
+                        <span class="path3"></span>
+                    </i>
+
+                    <span class="ms-3 text-gray-700 parent-hover-info fs-6 fw-bold text-center">
+                        Montant Total des paiements effectués: @ViewBag.TotalPaiement.ToString("N") Ar
+                    </span>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="row mt-10">
+        <div class="offset-md-2 col-md-8 offset-md-2">
+            <div class="card card-flush overflow-hidden h-md-100">
+                <form asp-controller="Admin" asp-action="Dashboard" class="text-center" method="get">
+                    <select class="form-select form-select-solid" aria-label="Select example" name="annee">
+                       @for(int i=2024; i>1999; i--){
+                            <option value="@i">@i</option>
+                        }
+                    </select>
+                    <button type="submit" class="btn btn-light-info mt-3">Ok</button>
+                </form>
+                <div class="card-header py-5">
+                    <h3 class="card-title align-items-start flex-column">
+                        <span class="card-label fw-bold text-dark">Montant des devis par mois</span>
+                    </h3>
+
+                </div>
+                <div class="card-body d-flex justify-content-between flex-column pb-1 px-0">
+
+                    <canvas id="myChart" class="min-h-auto ps-4 pe-6"></canvas>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const ctx = document.getElementById('myChart');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Decembre'],
+            datasets: [{
+                label: 'montant des devis',
+                data: @Html.Raw(Json.Serialize(ViewBag.Stats)),
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>

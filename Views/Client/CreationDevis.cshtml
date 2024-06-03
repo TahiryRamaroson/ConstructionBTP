@@ -1,0 +1,114 @@
+﻿@{
+	ViewData["Title"] = "Création de devis";
+	Layout = "_Layout_Client";
+}
+<div class="container">
+
+    <div class="text-center mt-5">
+        <h1>Création de devis</h1>
+    </div>
+    <form asp-controller="Client" asp-action="TraitementDevis" class="text-center" method="get">
+    <div class="row mt-10">
+        <div class="offset-md-1 col-md-10 offset-md-1">
+            <div class="row mb-5" data-kt-buttons="true" data-kt-buttons-target=".form-check-image, .form-check-input">
+                <h2 class="mb-5 mt-5">Choix du type de maison</h2>
+                @foreach (var item in ViewBag.Maisons)
+                {
+                    <!--begin::Col-->
+                    <div class="col-4">
+                        <label class="form-check-image active">
+                            <div class="form-check-wrapper">
+
+                                <div class="card card-bordered">
+                                    <div class="card-header">
+                                        <h3 class="card-title">@item.nom</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <p>@item.description</p>
+                                        <p>Surface: @item.surface</p>
+                                        <p class="text-success">@item.sommeTravaux.ToString("N") Ar</p>
+                                    </div>
+                                    <div class="card-footer">
+                                       Duréée des travaux: @item.duree jour(s)
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="form-check form-check-custom form-check-solid">
+                                <input class="form-check-input" type="radio" checked value="@item.id" name="maison" />
+                                <div class="form-check-label">
+                                    @item.nom
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                    <!--end::Col-->
+                }
+            </div>
+            <!--end::Row-->
+        </div>
+    </div>
+
+    <div class="row mt-10">
+        <div class="offset-md-1 col-md-10 offset-md-1">
+            <div class="row mb-5" data-kt-buttons="true" data-kt-buttons-target=".form-check-image, .form-check-input">
+                <h2 class="mb-5 mt-5">Choix du type de finition</h2>
+                @foreach (var item in ViewBag.Finitions)
+                {
+                    <!--begin::Col-->
+                    <div class="col-3">
+                        <label class="form-check-image active">
+                            <div class="form-check-wrapper">
+
+                                <div class="card card-bordered">
+                                    <div class="card-header">
+                                        <h3 class="card-title">@item.nom</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        @item.taux %
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="form-check form-check-custom form-check-solid">
+                                <input class="form-check-input" type="radio" checked value="@item.id" name="finition" />
+                                <div class="form-check-label">
+                                    @item.nom
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                    <!--end::Col-->
+                }
+            </div>
+            <!--end::Row-->
+        </div>
+    </div>
+    <!--begin::Row-->
+
+    <div class="row mt-10">
+        <div class="offset-md-1 col-md-10 offset-md-1">
+            <h2>Choix du début de travaux</h2>
+            <input type="datetime-local" class="form-control form-control-solid" name="debutTravaux" />
+        </div>
+    </div>
+
+        <div class="row mt-10">
+            <div class="offset-md-1 col-md-10 offset-md-1">
+                <h2>Lieu</h2>
+                <input type="text" class="form-control form-control-solid" name="lieu" />
+            </div>
+        </div>
+
+    <div class="row mt-10">
+        <div class="text-center">
+            <button type="submit" class="btn btn-lg btn-primary mb-5">Valider</button>
+        </div>
+    </div>
+    </form>
+
+</div>
